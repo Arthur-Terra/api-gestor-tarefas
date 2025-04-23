@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://static.wikia.nocookie.net/mineminenomi/images/3/3b/Gomu_Gomu_no_Mi.png/revision/latest/thumbnail/width/360/height/360?cb=20231117144926" type="image/jpg">
+    <title>Mugiwara</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000080;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            height: 80vh;
+            position: relative;
+        }
+
+        /* Container fino no topo (agora no fundo do botão de perfil) */
+        .top-container {
+            width: 80%;
+            height: 70px;
+            border-radius: 100px;
+            background-color: #000000; /* Cor de fundo dourada */
+            text-align: center;
+            margin-left: 355px;
+            margin-top: 5px;
+            line-height: 70px;
+            font-size: 25px;
+            font-weight: bold;
+            color: #ffffff;
+            position: absolute;
+            z-index: -1; /* Para ficar atrás do botão de perfil */
+        }
+
+        /* Container principal */
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            padding: 0px;
+            justify-content: flex-start; 
+        }
+
+        /* Container para os 3 elementos principais */
+        .content-wrapper {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            height: calc(100vh - 300px); /* Altura do conteúdo */
+        }
+
+        /* Container vazio à esquerda */
+        .left-container {
+            width: 15%;
+            left: 0px;
+            top: 40px;
+            background-color: #fff;
+            height: 100%;
+            border-radius: 0px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-right: 20px;
+            height: calc(125vh - 222px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            padding: 10px;
+        }
+
+        /* Botões circulares no container esquerdo */
+        .circle-button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #ff6347;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .circle-button:hover {
+            background-color: #ff4500;
+        }
+
+        /* Calendário central */
+        .calendar-container {
+            width: 70%;
+            margin-right: 15px;
+            background-color: #fff;
+            margin-top: 85px;
+            padding: 20px;
+            border-radius: 0px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            height: calc(120vh - 760px);
+            display: flex;
+        }
+
+        /* Container para o calendário e a legenda */
+        .calendar-wrapper {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            width: 100%;
+        }
+
+        .legend-container {
+            width: 20%;
+            margin-right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .legend-input {
+            margin-bottom: 10px;
+            padding: 5px;
+            width: 80%;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr); /* 7 dias da semana */
+            gap: 2px;
+            text-align: center;
+            height: top;
+        }
+
+        .calendar div {
+            padding: 15px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .calendar div:hover {
+            background-color: #fded05;
+            color: white;
+        }
+
+        /* Dashboard embaixo */
+        .dashboard {
+            width: 75%;
+            height: 100px;
+            width: 1455px;
+            background-color: #fff;
+            margin-top: 64px;
+            margin-left: 320px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 64px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Estilos para o botão de perfil */
+        .profile-button {
+            position: absolute;
+            top: 7px;
+            right: 62px;
+            width: 62px;
+            height: 62px;
+            left: 1823px;
+            background-color: #fff;
+            border-radius: 50%;
+            border: 2px solid #000080;
+            background-image: url('https://www.planocritico.com/wp-content/uploads/2022/01/invencivel-vol-14-meio-plano-critico-1024x683.jpg');
+            background-size: cover;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 1; /* Garantir que o botão fique acima do container fino */
+        }
+
+        /* Estilo para o menu suspenso */
+        .dropdown {
+            position: absolute;
+            top: 77px;
+            right: 47px;
+            display: none;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            width: 150px;
+            padding: 10px 0;
+            text-align: left;
+        }
+
+        .dropdown a {
+            padding: 10px 15px;
+            display: block;
+            color: #000080;
+            text-decoration: none;
+        }
+
+        .dropdown a:hover {
+            background-color: #f1f1f1;
+        }
+
+    </style>
+
+    <!-- Adicionando a biblioteca Chart.js para o gráfico de pizza -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+
+    <!-- Container fino no topo -->
+    <div class="top-container">
+        Bem-vindo ao Sistema Mugiwara!
+    </div>
+
+    <!-- Container principal -->
+    <div class="main-container">
+
+        <!-- Conteúdo central: calendário e dashboard -->
+        <div class="content-wrapper">
+
+            <!-- Container vazio à esquerda -->
+            <div class="left-container">
+                <div class="circle-button">1</div>
+                <div class="circle-button">2</div>
+                <div class="circle-button">3</div>
+                <div class="circle-button">4</div>
+            </div>
+
+            <!-- Calendário central -->
+            <div class="calendar-container">
+                <div class="calendar-wrapper">
+                    <div class="legend-container">
+                        <input type="text" class="legend-input" placeholder="Adicione uma legenda para o dia">
+                        <input type="text" class="legend-input" placeholder="Adicione uma legenda para o dia">
+                        <input type="text" class="legend-input" placeholder="Adicione uma legenda para o dia">
+                        <!-- Pode adicionar mais campos conforme necessário -->
+                    </div>
+
+                    <div class="calendar">
+                        <!-- Dias da semana -->
+                        <div>Dom</div>
+                        <div>Seg</div>
+                        <div>Ter</div>
+                        <div>Qua</div>
+                        <div>Qui</div>
+                        <div>Sex</div>
+                        <div>Sáb</div>
+
+                        <!-- Exemplo de um mês (os números podem ser dinamicamente preenchidos) -->
+                        <div>1</div>
+                        <div>2</div>
+                        <div>3</div>
+                        <div>4</div>
+                        <div>5</div>
+                        <div>6</div>
+                        <div>7</div>
+                        <div>8</div>
+                        <div>9</div>
+                        <div>10</div>
+                        <div>11</div>
+                        <div>12</div>
+                        <div>13</div>
+                        <div>14</div>
+                        <div>15</div>
+                        <div>16</div>
+                        <div>17</div>
+                        <div>18</div>
+                        <div>19</div>
+                        <div>20</div>
+                        <div>21</div>
+                        <div>22</div>
+                        <div>23</div>
+                        <div>24</div>
+                        <div>25</div>
+                        <div>26</div>
+                        <div>27</div>
+                        <div>28</div>
+                        <div>29</div>
+                        <div>30</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Dashboard embaixo com gráfico de pizza -->
+        <div class="dashboard">
+            <h4>Área de Dashboard - Aqui você pode adicionar widgets ou informações.</h4>
+            <canvas id="myPieChart" width="400" height="400"></canvas>
+        </div>
+
+    </div>
+
+    <script>
+        // Configuração do gráfico de pizza com legendas
+        var ctx = document.getElementById('myPieChart').getContext('2d');
+        var myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green'],
+                datasets: [{
+                    label: 'Colors Distribution',
+                    data: [12, 19, 3, 5],
+                    backgroundColor: ['#ff6347', '#0000ff', '#ffff00', '#008000'],
+                    borderColor: ['#ff6347', '#0000ff', '#ffff00', '#008000'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return tooltipItem.label + ': ' + tooltipItem.raw;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+    <!-- Botão de Foto de Perfil -->
+    <div class="profile-button" onclick="toggleDropdown(event)"></div>
+
+    <!-- Menu Suspenso de Opções -->
+    <div class="dropdown" id="profileDropdown">
+        <a href="#">Trocar Perfil</a>
+        <a href="#">Sair</a>
+    </div>
+
+    <script>
+        let isDropdownVisible = false;
+
+        function toggleDropdown(event) {
+            var dropdown = document.getElementById('profileDropdown');
+            isDropdownVisible = !isDropdownVisible;
+            dropdown.style.display = isDropdownVisible ? 'block' : 'none';
+            event.stopPropagation();
+        }
+
+        window.onclick = function(event) {
+            var dropdown = document.getElementById('profileDropdown');
+            var profileButton = document.querySelector('.profile-button');
+            if (!profileButton.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.style.display = 'none';
+                isDropdownVisible = false;
+            }
+        }
+    </script>
+
+</body>
+</html>

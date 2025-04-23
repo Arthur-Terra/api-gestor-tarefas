@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://static.wikia.nocookie.net/mineminenomi/images/3/3b/Gomu_Gomu_no_Mi.png/revision/latest/thumbnail/width/360/height/360?cb=20231117144926" type="image/jpg">
+    <title>Login - Mugiwara</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            margin-left: 1000px;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('https://i.pinimg.com/736x/e3/61/ba/e361ba965d385fc6b080b87279a206d3.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .login-container {
+            width: 400px;
+            background-color: rgba(255, 255, 255, 0.9); /* fundo branco com transparência */
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); 
+            text-align: center;
+        }
+        h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+            font-family: 'Arial', sans-serif;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        .input-group input {
+            width: 91%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #000001;
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .input-group input:focus {
+            border-color: #4CAF50;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .alert {
+            color: red;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            display: none;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #777;
+        }
+        .footer a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        h4 {
+            color: rgb(124, 142, 20);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Login </h2>
+        <h4>Entre com o e-mail e a senha</h4>
+
+        <div class="input-group">
+            <input type="text" id="username" placeholder="E-mail do Usuário" required>
+        </div>
+        
+        <div class="input-group">
+            <input type="password" id="password" placeholder="Senha" required>
+        </div>
+        
+        <button onclick="login()">Entrar</button>
+        
+        <div id="alert" class="alert">Usuário ou senha inválidos!</div>
+        
+        <div class="footer">
+            <p>Não tem uma conta? <a href="#">Crie uma agora</a></p>
+        </div>
+    </div>
+
+    <script>
+        function login() {
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const alertDiv = document.getElementById("alert");
+
+            alertDiv.style.display = "none";
+
+            if (username && password) {
+                alert("Login bem-sucedido!"); 
+            } else {
+                alertDiv.style.display = "block";
+            }
+        }
+    </script>
+
+</body>
+</html>
