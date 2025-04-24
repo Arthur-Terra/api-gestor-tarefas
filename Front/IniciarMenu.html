@@ -19,12 +19,11 @@
             position: relative;
         }
 
-        /* Container fino no topo (agora no fundo do botão de perfil) */
         .top-container {
             width: 80%;
             height: 70px;
             border-radius: 100px;
-            background-color: #000000; /* Cor de fundo dourada */
+            background-color: #000000;
             text-align: center;
             margin-left: 355px;
             margin-top: 5px;
@@ -33,37 +32,31 @@
             font-weight: bold;
             color: #ffffff;
             position: absolute;
-            z-index: -1; /* Para ficar atrás do botão de perfil */
+            z-index: -1;
         }
 
-        /* Container principal */
         .main-container {
             display: flex;
             flex-direction: column;
             width: 100%;
             padding: 0px;
-            justify-content: flex-start; 
+            justify-content: flex-start;
         }
 
-        /* Container para os 3 elementos principais */
         .content-wrapper {
             display: flex;
             justify-content: space-between;
             width: 100%;
-            height: calc(100vh - 300px); /* Altura do conteúdo */
+            height: calc(100vh - 300px);
         }
 
-        /* Container vazio à esquerda */
         .left-container {
             width: 15%;
-            left: 0px;
-            top: 40px;
             background-color: #fff;
             height: 100%;
             border-radius: 0px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             margin-right: 20px;
-            height: calc(125vh - 222px);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -71,7 +64,6 @@
             padding: 10px;
         }
 
-        /* Botões circulares no container esquerdo */
         .circle-button {
             width: 50px;
             height: 50px;
@@ -89,7 +81,6 @@
             background-color: #ff4500;
         }
 
-        /* Calendário central */
         .calendar-container {
             width: 70%;
             margin-right: 15px;
@@ -101,14 +92,16 @@
             text-align: center;
             height: calc(120vh - 760px);
             display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        /* Container para o calendário e a legenda */
         .calendar-wrapper {
             display: flex;
             justify-content: flex-start;
             align-items: flex-start;
             width: 100%;
+            flex-direction: column;
         }
 
         .legend-container {
@@ -130,10 +123,9 @@
 
         .calendar {
             display: grid;
-            grid-template-columns: repeat(7, 1fr); /* 7 dias da semana */
+            grid-template-columns: repeat(7, 1fr);
             gap: 2px;
             text-align: center;
-            height: top;
         }
 
         .calendar div {
@@ -148,11 +140,29 @@
             color: white;
         }
 
-        /* Dashboard embaixo */
+        .calendar-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .navigation-button {
+            background-color: #ff6347;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .navigation-button:hover {
+            background-color: #ff4500;
+        }
+
         .dashboard {
             width: 75%;
-            height: 100px;
-            width: 1455px;
             background-color: #fff;
             margin-top: 64px;
             margin-left: 320px;
@@ -165,14 +175,12 @@
             text-align: center;
         }
 
-        /* Estilos para o botão de perfil */
         .profile-button {
             position: absolute;
             top: 7px;
             right: 62px;
             width: 62px;
             height: 62px;
-            left: 1823px;
             background-color: #fff;
             border-radius: 50%;
             border: 2px solid #000080;
@@ -180,10 +188,9 @@
             background-size: cover;
             cursor: pointer;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            z-index: 1; /* Garantir que o botão fique acima do container fino */
+            z-index: 1;
         }
 
-        /* Estilo para o menu suspenso */
         .dropdown {
             position: absolute;
             top: 77px;
@@ -210,24 +217,17 @@
 
     </style>
 
-    <!-- Adicionando a biblioteca Chart.js para o gráfico de pizza -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 </head>
 <body>
 
-    <!-- Container fino no topo -->
     <div class="top-container">
         Bem-vindo ao Sistema Mugiwara!
     </div>
 
-    <!-- Container principal -->
     <div class="main-container">
-
-        <!-- Conteúdo central: calendário e dashboard -->
         <div class="content-wrapper">
 
-            <!-- Container vazio à esquerda -->
             <div class="left-container">
                 <div class="circle-button">1</div>
                 <div class="circle-button">2</div>
@@ -235,64 +235,27 @@
                 <div class="circle-button">4</div>
             </div>
 
-            <!-- Calendário central -->
             <div class="calendar-container">
                 <div class="calendar-wrapper">
-                    <div class="legend-container">
-                        <input type="text" class="legend-input" placeholder="Adicione uma legenda para o dia">
-                        <input type="text" class="legend-input" placeholder="Adicione uma legenda para o dia">
-                        <input type="text" class="legend-input" placeholder="Adicione uma legenda para o dia">
-                        <!-- Pode adicionar mais campos conforme necessário -->
+                    <div class="calendar-navigation">
+                        <button class="navigation-button" onclick="navigateMonth(-1)">&#8592;</button>
+                        <span id="calendar-month-year">Abril 2025</span>
+                        <button class="navigation-button" onclick="navigateMonth(1)">&#8594;</button>
                     </div>
 
                     <div class="calendar">
-                        <!-- Dias da semana -->
-                        <div>Dom</div>
-                        <div>Seg</div>
-                        <div>Ter</div>
-                        <div>Qua</div>
-                        <div>Qui</div>
-                        <div>Sex</div>
-                        <div>Sáb</div>
-
-                        <!-- Exemplo de um mês (os números podem ser dinamicamente preenchidos) -->
-                        <div>1</div>
-                        <div>2</div>
-                        <div>3</div>
-                        <div>4</div>
-                        <div>5</div>
-                        <div>6</div>
-                        <div>7</div>
-                        <div>8</div>
-                        <div>9</div>
-                        <div>10</div>
-                        <div>11</div>
-                        <div>12</div>
-                        <div>13</div>
-                        <div>14</div>
-                        <div>15</div>
-                        <div>16</div>
-                        <div>17</div>
-                        <div>18</div>
-                        <div>19</div>
-                        <div>20</div>
-                        <div>21</div>
-                        <div>22</div>
-                        <div>23</div>
-                        <div>24</div>
-                        <div>25</div>
-                        <div>26</div>
-                        <div>27</div>
-                        <div>28</div>
-                        <div>29</div>
-                        <div>30</div>
+                        <div>Dom</div><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div>
+                        <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div>
+                        <div>8</div><div>9</div><div>10</div><div>11</div><div>12</div><div>13</div><div>14</div>
+                        <div>15</div><div>16</div><div>17</div><div>18</div><div>19</div><div>20</div><div>21</div>
+                        <div>22</div><div>23</div><div>24</div><div>25</div><div>26</div><div>27</div><div>28</div>
+                        <div>29</div><div>30</div>
                     </div>
                 </div>
             </div>
 
         </div>
 
-        <!-- Dashboard embaixo com gráfico de pizza -->
         <div class="dashboard">
             <h4>Área de Dashboard - Aqui você pode adicionar widgets ou informações.</h4>
             <canvas id="myPieChart" width="400" height="400"></canvas>
@@ -301,42 +264,55 @@
     </div>
 
     <script>
-        // Configuração do gráfico de pizza com legendas
-        var ctx = document.getElementById('myPieChart').getContext('2d');
-        var myPieChart = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green'],
-                datasets: [{
-                    label: 'Colors Distribution',
-                    data: [12, 19, 3, 5],
-                    backgroundColor: ['#ff6347', '#0000ff', '#ffff00', '#008000'],
-                    borderColor: ['#ff6347', '#0000ff', '#ffff00', '#008000'],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(tooltipItem) {
-                                return tooltipItem.label + ': ' + tooltipItem.raw;
-                            }
-                        }
-                    }
-                }
+        const months = [
+            'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+        ];
+
+        let currentDate = new Date();
+
+        function updateCalendar() {
+            const month = currentDate.getMonth();
+            const year = currentDate.getFullYear();
+            document.getElementById('calendar-month-year').textContent = `${months[month]} ${year}`;
+            generateCalendar(month, year);
+        }
+
+        function navigateMonth(direction) {
+            currentDate.setMonth(currentDate.getMonth() + direction);
+            updateCalendar();
+        }
+
+        function generateCalendar(month, year) {
+            const firstDay = new Date(year, month, 1).getDay();
+            const lastDate = new Date(year, month + 1, 0).getDate();
+            const calendarDivs = document.querySelector('.calendar');
+            calendarDivs.innerHTML = '';
+
+            // Adicionar os dias da semana
+            ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'].forEach(day => {
+                const div = document.createElement('div');
+                div.textContent = day;
+                calendarDivs.appendChild(div);
+            });
+
+            // Adicionar os dias do mês
+            for (let i = 0; i < firstDay; i++) {
+                const div = document.createElement('div');
+                calendarDivs.appendChild(div);
             }
-        });
+
+            for (let i = 1; i <= lastDate; i++) {
+                const div = document.createElement('div');
+                div.textContent = i;
+                calendarDivs.appendChild(div);
+            }
+        }
+
+        updateCalendar();
     </script>
 
-    <!-- Botão de Foto de Perfil -->
     <div class="profile-button" onclick="toggleDropdown(event)"></div>
 
-    <!-- Menu Suspenso de Opções -->
     <div class="dropdown" id="profileDropdown">
         <a href="#">Trocar Perfil</a>
         <a href="#">Sair</a>
